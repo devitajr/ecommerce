@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Ecommerce by ITA Júnior">
+
+{% include "startpage/titleAndLogo.html" %}
+
+{% include "startpage/includes.html"%}
+
+</head>
+<body>
+
+{% include "startpage/header.html" %}
+
+<section class="bg2">
+<div class="container">
+<div class="row no-gutters">
+	<div class="col-lg-9 offset-lg-5-24">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'paginaInicial'%}>Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'novosProdutos'%}>Novos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'maisComprados'%}>Mais Comprados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'promocao'%}>Promoções</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mais</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown07">
+            {% for category in categories %}
+                <a class="dropdown-item" href={{category.url}}>{{category.name}}</a>
+            {% endfor %}
+          </div>
+        </li>
+      </ul>
+    </div> <!-- collapse .// -->
+</nav>
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+</div> <!-- container .// -->
+</section>
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-main bg padding-bottom">
+<div class="container">
+<div class="row no-gutters border border-top-0 bg-white">
+<aside class="col-lg-5-24">
+<nav>
+	<div class="title-category bg-secondary white d-none d-lg-block" style="margin-top:-53px">
+		<span>Meus Serviços</span>
+	</div>
+	<ul class="menu-category">
+        {% for category in categories|slice:"6" %}
+            <li> <a href={{category.url}}>{{category.name}}</a></li>
+        {% endfor %}
+	</ul>
+</nav>
+</aside> <!-- col.// -->
+<main class="col-lg-19-24">
+<!-- ========= intro aside ========= -->
+<div class="row no-gutters">
+	<div class="col-lg-9 col-md-8">
+<!-- ================= main slide ================= -->
+
+<div class="owl-init slider-main owl-carousel" data-items="1" data-margin="1" data-nav="true" data-dots="false">
+	{% for carrosel_product in carrosel_products %}
+        <div class="item-slide">
+		    <img src={{ carrosel_product.image_url }} style="width:750px; height:400px;">
+	    </div>
+    {% endfor %}
+</div>
+
+<!-- ============== main slidesow .end // ============= -->
+	</div> <!-- col.// -->
+	<div class="col-lg-3 col-md-4">
+    <ul class="list-group list-group-flush">
+        {% for item in items|slice:":3" %} 
+            <li class="list-group-item">
+                <h6>{{ item.name }}</h6>
+                <a href="item.url" class="btn btn-primary btn-sm btn-round"> Ver produto </a>
+            </li>
+        {% endfor %}
+    </ul>
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+<!-- ======== intro aside ========= .// -->
+</main> <!-- col.// -->
+</div> <!-- row.// -->
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
+
+
+<header class="section-heading">
+<h3 class="title-section">{% block Title %}{% endblock %}</h3>
+</header>
+
+<article>
+    {% block body %}
+    {% endblock %}
+</article>
+
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+
+{% include "startpage/footer.html" %}
+
+<!-- ========================= FOOTER END // ========================= -->
+
+
+</body>
+</html>

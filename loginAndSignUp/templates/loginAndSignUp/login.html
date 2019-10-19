@@ -1,0 +1,30 @@
+{% extends "loginAndSignUp/baseLoginAndSignUp.html" %}
+{% load static %}
+{% block body %}
+
+<form 
+    method="POST"
+
+>
+    <div>
+        <p>
+            <span>Coloque seu usuário:</span>
+            <input 
+            name="username" 
+            type="text" 
+            placeholder="login"
+            >
+            </input>
+        </p>
+        <p>
+        <span>Coloque sua senha:</span>
+        <input 
+        name="password" 
+        type="password"
+        placeholder="senha"
+        >
+        </input>
+        </p>
+    </div>
+</form>
+{% endblock %}
