@@ -1,0 +1,31 @@
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header" style="    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;">
+        <img src={{user.image_url}} alt="imagem do meu perfil" style="width: 128px;"/>
+    </div>
+    <ul class="list-unstyled components">
+        <p>{{user.first_name}} {{user.last_name}}</p>
+        <li>
+            <a href="{% url "paginaInicial" %}">Pagina Inicial</a>
+        </li>
+        <li>
+            <a href="{% url "perfil" %}">Histórico de Compras</a>
+        </li>
+        <li>
+            <a href="{% url "mudancaDados" %}">Mudar meus dados</a>
+        </li>
+        <li>
+            <a href="{% url "mudancaSenha" %}">Mudar minha senha</a>
+        </li>
+        <li>
+            <a href="{% url "desativarConta" %}">Desativar minha conta</a>
+        </li>
+        <li>
+            <a href="{% url "logout" %}">Sair</a>
+        </li>
+    </ul>
+</nav>
+

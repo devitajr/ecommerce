@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+<head>
+    {% include "startpage/titleAndLogo.html" %}
+    <link href="{% static "loginAndSignUp/css/sidebar.css" %}" rel="stylesheet" type="text/css"/>
+    {% include "startpage/includes.html" %}
+</head>
+<body>
+<div>
+    <div>
+        {% include "startpage/header.html" %}
+    </div>
+    <div>
+        <div style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            ">
+            {% include "loginAndSignUp/sidebar.html" %}
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+    <div
+        style="
+            bottom: 0;
+            position: absolute;
+            right: 0;
+            left: 0;
+        "
+    >
+        {% include "startpage/footer.html" %}
+    </div>
+</div>
+</body>
+</html>

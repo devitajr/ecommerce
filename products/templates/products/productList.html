@@ -1,0 +1,32 @@
+
+{% extends 'products/baseProducts.html' %}
+{% load static %}
+{% block body %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg padding-y-sm">
+<div class="container">
+<div class="padding-y-sm">
+{% if pesquisou_algo == True %}
+<span>{{ qntd_resultados_items }} resultados para {{ item_pesquisado }}</span>	
+{% endif %}
+</div>
+<div class="row-sm">    
+{% for product in products %}
+	<div class="col-md-3 col-sm-6" style="width:100%;">
+        <figure style="width: 300px; height: 300px;" class="card card-product">
+            <div class="img-wrap"> <img src={{product.image_url}} style="width: 300px; height: 300px;" alt="imagem do produto"></div>
+            <figcaption class="info-wrap">
+                <a href="{{ prdouct.page_url}}" class="title">{{ product.name }}</a>
+                <div class="price-wrap">
+                    <span class="price-new">{{ product.value }}</span>
+                    {% if product.inPromotion == True %}
+                        <del class="price-old">{{product.old_value}}</del>
+                    {% endif %}
+                </div> <!-- price-wrap.// -->
+            </figcaption>
+        </figure> <!-- card // -->
+	</div> <!-- col // -->
+    {% endfor %}        
+</div><!-- container // -->
+</section>
+{% endblock %}

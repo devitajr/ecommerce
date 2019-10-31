@@ -1,0 +1,87 @@
+{% extends "loginAndSignUp/baseLoginAndSignUp.html" %}
+{% load static %}
+{% block body %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{% static "loginAndSignUp/images/img-01.png" %}" alt="IMG">
+            </div>
+
+            <form
+                method="POST" 
+                class="login100-form validate-form"
+                activate=""
+            >
+                {% csrf_token %}
+                <span class="login100-form-title">
+                    Bem vindo!
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça do seu login!">
+                    <input class="input100" type="text" name="first_name" placeholder="Nome">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça do seu login!">
+                    <input class="input100" type="text" name="last_name" placeholder="Sobrenome">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça do seu login!">
+                    <input class="input100" type="email" name="email" placeholder="Email">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça do seu login!">
+                    <input class="input100" type="text" name="username" placeholder="Login">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça da sua senha">
+                    <input class="input100" type="password" name="password1" placeholder="Senha">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Não esqueça da sua senha">
+                    <input class="input100" type="password" name="password2" placeholder="Confirmar sua senha">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Criar conta
+                    </button>
+                </div>
+            </form>
+            {% if passwordsNotEqual %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Senhas incompatíveis!</strong> Tente novamente
+            </div>
+            {% endif %}
+            {% if alreadyExistsUser %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Usuário já existe!</strong> Tente outro nome de usuário
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

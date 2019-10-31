@@ -1,0 +1,24 @@
+{% load static %}
+<div id="wrapper">
+<h1>{{table_name}}</h1>
+<table class="table table-hover" cellspacing="0" cellpadding="0">
+<thead>
+    <tr>
+    <th scope="col"><span>Índice</span></th>
+    {% for thead in theads %}
+    <th scope="col"><span>{{thead}}</span></th>
+    {% endfor %}
+    </tr>
+</thead>
+<tbody>
+    {% for trow in trows %}
+        <tr>
+        <td>{{forloop.counter}}</td>
+        {% for tdata in trow %}
+            <td>{{tdata}}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>

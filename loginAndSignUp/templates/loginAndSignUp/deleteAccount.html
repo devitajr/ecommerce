@@ -1,0 +1,37 @@
+{% extends "loginAndSignUp/baseProfile.html" %}
+{% block body %}
+{% include "loginAndSignUp/includesLogin.html" %}
+<div
+    style="display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-content: center;
+    align-items: center;"
+>
+    <form
+        method="POST"
+    >
+    {% csrf_token %}
+    <div class="alert alert-danger" style="width: 100%; display: flex; justify-content: center;">
+        <strong>Cuidado!</strong> <span> Ao deletar sua conta, não haverá maneira de a recuperar!</span>
+    </div>
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="password" name="password" placeholder="Confirme sua senha">
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="container-login100-form-btn">
+        <button class="login100-form-btn" type="submit">
+            Deletar conta
+        </button>
+    </div>
+    </form>
+    {% if senhaErrada %}
+        <div class="alert alert-warning">
+        <strong>Erro!</strong> Certifique-se de que colocou a senha correta!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

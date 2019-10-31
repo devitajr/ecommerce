@@ -1,0 +1,9 @@
+.row_{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.width_100{
+    width:100%;
+}

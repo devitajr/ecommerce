@@ -1,44 +1,133 @@
-<header class="section-header">
-<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
-<div class="container">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTop">
-    <ul class="navbar-nav mr-auto">
-		<li class="nav-item active">
-			<a class="nav-link" href="https://itajunior.com.br/"> <i class="fa fa-phone"></i> Nós ligue: {{company.company_telephone}} </a>
-		</li>
-    </ul>
-  </div> <!-- navbar-collapse .// -->
-</div> <!-- container //  -->
-</nav>
-
-<section class="header-main">
-	<div class="container">
-<div class="row align-items-center" style="display: flex; flex-direction: row; justify-content: space-between;">
-	<div class="col-lg-5-24 col-sm-5 col-4">
-		<div class="brand-wrap">
-			<img class="logo" src={{company.company_logo_url}}>
-			<h2 class="logo-text">{{company.name}}</h2>
-		</div> <!-- brand-wrap.// -->
-	</div>
-	<div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
-		<div class="d-flex justify-content-end">
-			<div class="widget-header">
-				<small class="title text-muted">Bem vindo à nossa loja!</small>
-				<div> <a href={% url 'entrar'%}>Entre</a> <span class="dark-transp"> | </span>
-				<a href={% url 'seInscreva'%}> Se inscreva</a></div>
+{% if user.is_authenticated %}
+	<header class="section-header">
+		<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+		<div class="container">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTop">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="https://itajunior.com.br/"> <i class="fa fa-phone"></i> Nós ligue: {{company.company_telephone}} </a>
+				</li>
+			</ul>
+		</div> <!-- navbar-collapse .// -->
+		</div> <!-- container //  -->
+		</nav>
+		
+		<section class="header-main">
+			<div class="container">
+		<div class="row align-items-center" style="display: flex; flex-direction: row; justify-content: space-between;">
+			<div class="col-lg-5-24 col-sm-5 col-4">
+				<a style="color:black;" href="{% url 'paginaInicial' %}">
+					<div class="brand-wrap">
+						<img class="logo" src={{company.company_logo_url}}>
+						<h2 class="logo-text">{{company.name}}</h2>
+					</div> <!-- brand-wrap.// -->
+				</a>
 			</div>
-			<a href="#" class="widget-header border-left pl-3 ml-3">
-				<div class="icontext">
-					<div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
-				</div>
-				<span class="badge badge-pill badge-danger notify">0</span>
-			</a>
-		</div> <!-- widgets-wrap.// -->
+			<div class="col-lg-11-24 col-sm-8">
+				<form action="{% url "listaDeProdutos" %}" method="POST" class="py-1">
+					{% csrf_token %}
+					<div class="input-group w-100">
+						<select required class="custom-select" style="font-size:12px!important;" name="category_name">
+						<option value="">Categorias</option>
+						{% for category in categories %}
+							<option value={{category.name}}>{{category.name}}</option>
+						{% endfor %}
+					</select>
+						<input name="item_pesquisado" type="text" class="form-control" style="width:50%;" placeholder="Procurar">
+						<div class="input-group-append">
+						<button class="btn btn-primary" type="submit">
+							<i class="fa fa-search"></i> Procurar 
+						</button>
+						</div>
+					</div>
+				</form> <!-- search-wrap .end// -->
+			</div> <!-- col.// -->
+			<div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
+				<div class="d-flex justify-content-end">
+					<div class="widget-header">
+						<small class="title text-muted">Olá {{user.first_name}}!</small>
+						<div> <a href={% url 'perfil'%}>Ver perfil</a> <span class="dark-transp"> | </span>
+						<a href={% url 'logout'%}>Sair</a></div>
+					</div>
+					<a href="{% url 'compras'%}" class="widget-header border-left pl-3 ml-3">
+						<div class="icontext">
+							<div style="display: flex; justify-content: center; align-items: center;" class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
+						</div>
+						<span class="badge badge-pill badge-danger notify">0</span>
+					</a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+			</div> <!-- container.// -->
+		</section> <!-- header-main .// -->
+	</header> <!-- section-header.// -->
+{% endif %}
+{% if user.is_authenticated == False %}
+	<header class="section-header">
+		<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+		<div class="container">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTop">
+			<ul class="navbar-nav mr-auto">
+				<li style="display: flex; justify-content: center; align-items: center;" class="nav-item active">
+					<a class="nav-link" href="https://itajunior.com.br/"> <i class="fa fa-phone"></i> Nós ligue: {{company.company_telephone}} </a>
+				</li>
+			</ul>
+		</div> <!-- navbar-collapse .// -->
+		</div> <!-- container //  -->
+		</nav>
+		<section class="header-main">
+			<div class="container">
+		<div class="row align-items-center" style="display: flex; flex-direction: row; justify-content: space-between;">
+			<div class="col-lg-5-24 col-sm-5 col-4">
+				<div class="brand-wrap">
+				<a style="color:black;" href="{% url 'paginaInicial' %}">
+					<img class="logo" src={{company.company_logo_url}}>
+					<h2 class="logo-text">{{company.name}}</h2>
+				</a>
+				</div> <!-- brand-wrap.// -->
+			</div>
+			<div class="col-lg-11-24 col-sm-8">
+			<form action="{% url "listaDeProdutos" %}" method="POST" class="py-1">
+				{% csrf_token %}
+				<div class="input-group w-100">
+					<select class="custom-select" style="font-size:12px!important;"  name="category_name" required>
+						<option value="">Categorias</option>
+						{% for category in categories %}
+							<option value={{category.name}}>{{category.name}}</option>
+						{% endfor %}
+					</select>
+				    <input name="item_pesquisado" type="text" class="form-control" style="width:50%;" placeholder="Search">
+				    <div class="input-group-append">
+				      <button class="btn btn-primary" type="submit">
+				        <i class="fa fa-search"></i> Procurar 
+				      </button>
+				    </div>
+			    </div>
+			</form> <!-- search-wrap .end// -->
 	</div> <!-- col.// -->
-</div> <!-- row.// -->
-	</div> <!-- container.// -->
-</section> <!-- header-main .// -->
-</header> <!-- section-header.// -->
+			<div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
+				<div class="d-flex justify-content-end">
+					<div class="widget-header">
+						<small class="title text-muted">Bem vindo à nossa loja!</small>
+						<div> <a href={% url 'entrar'%}>Entre</a> <span class="dark-transp"> | </span>
+						<a href={% url 'seInscreva'%}> Se inscreva</a></div>
+					</div>
+					<a href="#" class="widget-header border-left pl-3 ml-3">
+						<div class="icontext">
+							<div style="display: flex; justify-content: center; align-items: center;" class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
+						</div>
+						<span class="badge badge-pill badge-danger notify">0</span>
+					</a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+			</div> <!-- container.// -->
+		</section> <!-- header-main .// -->
+	</header> <!-- section-header.// -->
+{% endif %}

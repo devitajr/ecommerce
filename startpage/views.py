@@ -15,7 +15,11 @@ def promocao(request):
 
 def paginaInicial(request):
     
+    user = request.user
+
     company = Company.objects.filter()
+
+    categories = Category.objects.all()
 
     carrosel_products = Product.objects.filter(inCarrossel=True)
 
@@ -28,4 +32,6 @@ def paginaInicial(request):
         'items': items,
         'carrosel_products':carrosel_products,
         'categories': categories,
+        'user':user,
+        'categories':categories,
     })

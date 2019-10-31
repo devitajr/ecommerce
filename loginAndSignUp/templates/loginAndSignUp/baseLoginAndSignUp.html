@@ -1,66 +1,21 @@
-{% comment %} https://mymodernmet.com/wp/wp-content/uploads/2019/03/perks-of-a-library-card-1.jpg
- {% endcomment %}
 {% load static %}
 <!DOCTYPE HTML>
-<style>
-    html, body {
-        height: 100%;
-        margin: 0px;
-    }
-</style>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="author" content="Ecommerce by ITA Júnior">
-        {% include "startpage/includes.html" %}
-        {% include "startpage/titleAndLogo.html" %}       
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% include "startpage/titleAndLogo.html" %}
+        {% include "loginAndSignUp/includesLogin.html" %} 
+        {% include "startpage/includes.html" %}     
     </head>
-    <body>
+    <body style="width:100%;">
         {% include "startpage/header.html" %}
-        <div style="height: 70%;">
-            <div style="
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-around;
-                height: 100%;
-            ">
-                <div
-                    style="height:100%!important;"
-                >
-                    <img 
-                        src="https://mymodernmet.com/wp/wp-content/uploads/2019/03/perks-of-a-library-card-1.jpg"
-                        style="height:100%!important;
-                        "
-                    />
-                </div>
-                <div style="
-                    margin-left: auto;
-                    background-color: rgb(236, 237, 237);
-                    height: 200px;
-                    width: 500px;
-                    border: 1px solid rgb(236, 237, 237);
-                    border-radius: 10px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                ">
-                    {% block body %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-        <div
-        style="
-            position: absolute;
-            bottom: 0;
-            width:100%;
-            margin-bottom:0px;
-        ">
-            {% include "startpage/footer.html" %}
-        </div>
+        {% block body %}
+        {% endblock %}
+        {% include "startpage/footer.html" %}
     </body>
 </html>
 
