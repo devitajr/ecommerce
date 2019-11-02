@@ -1,0 +1,14 @@
+{% load static %}
+<html style="height:100%;">
+    <head>
+        {% include 'startpage/includes.html'%}
+    </head>
+    <body style="height:100%;">
+        {% include 'startpage/header.html' %}
+        <div style="height:100%;">
+            {% block body %}
+            {% endblock %}
+        </div>
+        {% include 'startpage/footer.html' %}
+    </body>
+</html>
