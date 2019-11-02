@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Product
 from startpage.models import *
+from django.http import HttpResponseNotFound
 
 # Create your views here.
 
@@ -58,25 +59,36 @@ def listaProdutos(request):
         'pesquisou_algo':pesquisou_algo,
     })
 
-def produto(request):
+def produto(request,main_product_id):
+    
+    if main_product_id != None:
 
-    number_of_stars=1
+        main_product = Product.objects.filter(id = main_product_id)
+        
+        if main_product.exists():        
+            main_product = main_product[0]
+            
+            company = Company.objects.all()
 
-    quantity_in_stock = 10
+            categories = Category.objects.all()
 
-    company = Company.objects.all()
+            # number_of_stars=main_product.number_of_stars
+            number_of_stars = 3
+            # quantity_in_stock = main_product.quantity_in_stock
+            quantity_in_stock = 3
+            related_items = Product.objects.filter(category=main_product.category)
+            
+            return render(request,"products/product.html",{
+                'number_of_stars': range(0,number_of_stars),
+                'company': company[0],
+                'categories': categories,
+                'main_product':main_product,
+                'related_items':related_items,
+                'quantity_in_stock': range(1,quantity_in_stock)
+            })
+        
+        else:
+            return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Produto não encontrado</h3>')    
 
-    main_product = None
-
-    categories = Category.objects.all()
-
-    related_items = None
-
-    return render(request,"products/product.html",{
-        'number_of_stars': range(0,number_of_stars),
-        'company': company[0],
-        'categories': categories,
-        'main_product':main_product,
-        'related_items':related_items,
-        'quantity_in_stock': range(1,quantity_in_stock)
-    })
+    else:
+        return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Página não encontrada</h3>')

@@ -90,7 +90,7 @@
         {% for item in items|slice:":3" %} 
             <li class="list-group-item">
                 <h6>{{ item.name }}</h6>
-                <a href="item.url" class="btn btn-primary btn-sm btn-round"> Ver produto </a>
+                <a href={% url 'produto' main_product_id=item.id %} class="btn btn-primary btn-sm btn-round"> Ver produto </a>
             </li>
         {% endfor %}
     </ul>

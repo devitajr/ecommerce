@@ -11,7 +11,7 @@
 		<aside class="col-sm-6 border-right">
 <article class="gallery-wrap"> 
 <div class="img-big-wrap">
-  <div> <a href="#" data-fancybox=""><img src={{main_product.image_url}}></a></div>
+  <div> <a href="{{main_product.image_url}}" data-fancybox=""><img src={{main_product.image_url}}></a></div>
 </div> <!-- slider-product.// -->
 <div class="img-small-wrap">
     {% for item in related_items %}
@@ -81,7 +81,7 @@
 	</div> <!-- row.// -->
 	<hr>
 	<a href="#" class="btn  btn-primary"> <i class="fa fa-envelope"></i>Entrar em contato</a>
-	<a href="#" class="btn  btn-outline-primary">Pedir</a>
+	<a href="#" class="btn  btn-outline-primary">Adicionar ao Carrinho</a>
 <!-- short-info-wrap .// -->
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
@@ -105,12 +105,12 @@
 	    Sugeridos
 	</div>
 	<div class="card-body row">
-    {% for item in suggested_item %}
+    {% for item in related_items|slice:":3" %}
         <div class="col-md-12 col-sm-3">
 	<figure class="item border-bottom mb-3">
-			<a href="#" class="img-wrap"> <img src={{item.image_url}} class="img-md"></a>
+			<a href="{% url 'produto' main_product_id=item.id %}" class="img-wrap"> <img src={{item.image_url}} class="img-md"></a>
 			<figcaption class="info-wrap">
-				<a href="#" class="title">{{item.name}}</a>
+				<a href="{% url 'produto' main_product_id=item.id %}" class="title">{{item.name}}</a>
 				<div class="price-wrap mb-3">
 					<span class="price-new">R${{item.value}}</span> 
                     {% if item.inPromotion %}

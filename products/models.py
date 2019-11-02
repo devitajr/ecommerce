@@ -30,8 +30,25 @@ class Product(models.Model):
 
     category = models.ForeignKey(Category,on_delete=models.DO_NOTHING)
 
-    page_url = models.CharField(max_length=500)
+    # data_de_entrada = models.DateField()
 
+    # quantity_in_stock = models.IntegerField()
+
+    # POSSIBLE_NUMBER_OF_STARS = [
+    #     (1,"1"),
+    #     (2,"2"),
+    #     (3,"3"),
+    #     (4,"4"),
+    #     (5,"5"),
+    # ]
+
+    # number_of_stars = models.IntegerField(choices = POSSIBLE_NUMBER_OF_STARS)
+
+    # color = 
+
+    # model = 
+
+    # delivery_place = 
     class Meta:
         verbose_name = _("Produto")
         verbose_name_plural = _("Produtos")
