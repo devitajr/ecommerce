@@ -5,13 +5,13 @@ from products.models import *
 # Create your views here.
 
 def maisComprados(request):
-    pass
+    return render(request, "startpage/mostBought.html")
 
 def novosProdutos(request):
-    pass
+    return render(request, "startpage/NewProducts.html")
 
 def promocao(request):
-    pass
+    return render(request, "startpage/promotion.html")
 
 def paginaInicial(request):
     

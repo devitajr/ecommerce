@@ -16,7 +16,7 @@
         <figure style="width: 300px; height: 300px;" class="card card-product">
             <div class="img-wrap"> <img src={{product.image_url}} style="width: 300px; height: 300px;" alt="imagem do produto"></div>
             <figcaption class="info-wrap">
-                <a href="{{ prdouct.page_url}}" class="title">{{ product.name }}</a>
+                <a href="{% url 'produto' main_product_id=product.id %}" class="title">{{ product.name }}</a>
                 <div class="price-wrap">
                     <span class="price-new">{{ product.value }}</span>
                     {% if product.inPromotion == True %}
