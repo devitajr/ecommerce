@@ -1,0 +1,52 @@
+{% extends 'products/baseProducts.html' %}
+{% load static %}
+{% block body %}
+<div style="text-align: center;" class="container">
+    <div class="card" style="width:70%;">
+        <h3>Valor Total da Compra: R$ {{value}}</h3>
+        <form class="container" action="payment" method="POST">{% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6" >
+                        <label for="inputEmail">Email</label>
+                        <input  type="email" class="form-control" id="inputEmail" placeholder="Email" value={{email}}>
+                </div>
+                <div class="form-group col-md-6">
+                        <label for="inputPassword">Senha</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Senha" value={{password}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Endereço</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" value={{adress}}>
+            </div>
+            <div class="form-group">
+                <label for="inputCEP"></label>
+                <input type="text" class="form-control" id="inputCEP" placeholder="12228-462" value={{cep}}>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                        <label for="inputCity">Cidade</label>
+                        <input type="text" class="form-control" id="inputCity" value={{city}}>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6" >
+                        <label for="inputCartao">Número do Cartão</label>
+                        <input  type="text" class="form-control" id="inputCartao" placeholder="1111 1111 1111 1111" value={{card}}>
+                </div>
+                <div class="form-group col-md-6">
+                        <label for="inputData">Data de Expiração</label>
+                        <input type="date" class="form-control" id="inputData" placeholder="12/8" value={{date}}>
+                </div>
+                <div class="form-group col-md-6">
+                        <label for="inputCVV">CVV</label>
+                        <input type="text" class="form-control" id="inputCVV" placeholder="222" value={{cvv}}>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Comprar</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

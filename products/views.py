@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Product
 from startpage.models import *
 from django.http import HttpResponseNotFound
+from .cart import Cart
+from .forms import PayForm
+
 
 # Create your views here.
 
@@ -92,3 +95,43 @@ def produto(request,main_product_id):
 
     else:
         return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Página não encontrada</h3>')
+
+def cartList(request):
+    cart = Cart(request)
+
+    context = {
+        'cart':cart,
+    }
+
+    return render(request, 'cart/cartList.html', context)
+
+def payCompleted(request):
+    return render(request, 'pay/payCompleted.html', {})
+
+def payProducts(request):
+    cart = Cart(request)
+    value = cart.get_total_value()
+    return render(request, 'pay/payProducts.html', {'value':value})
+
+def productBreakdown(request):
+    return render(request, 'products/productBreakdown.html', {})
+
+
+def adicionarProdutoCarrinho(request, main_product_id):
+    if request.user.is_authenticated:
+        if main_product_id != None:
+            product = Product.objects.filter(id = main_product_id)[0]
+            cart = Cart(request)
+
+            cart.add(product)
+    return redirect("listaDeProdutos")
+
+def payment(request):
+    if(request.method == 'POST'):
+        form = PayForm(request.POST)
+        if not form.is_valid():
+            return redirect(payCompleted)
+    else:
+        form = PayForm(initial={'key': 'value'})
+    
+    return redirect('payProducts')

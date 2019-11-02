@@ -52,11 +52,11 @@
 						<div> <a href={% url 'perfil'%}>Ver perfil</a> <span class="dark-transp"> | </span>
 						<a href={% url 'logout'%}>Sair</a></div>
 					</div>
-					<a href="{% url 'compras'%}" class="widget-header border-left pl-3 ml-3">
+					<a href="{% url 'cartList'%}" class="widget-header border-left pl-3 ml-3">
 						<div class="icontext">
 							<div style="display: flex; justify-content: center; align-items: center;" class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
 						</div>
-						<span class="badge badge-pill badge-danger notify">0</span>
+						<span class="badge badge-pill badge-danger notify">{{num}}</span>
 					</a>
 				</div> <!-- widgets-wrap.// -->
 			</div> <!-- col.// -->
@@ -122,7 +122,7 @@
 						<div class="icontext">
 							<div style="display: flex; justify-content: center; align-items: center;" class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
 						</div>
-						<span class="badge badge-pill badge-danger notify">0</span>
+						<span class="badge badge-pill badge-danger notify">{{num}}</span>
 					</a>
 				</div> <!-- widgets-wrap.// -->
 			</div> <!-- col.// -->

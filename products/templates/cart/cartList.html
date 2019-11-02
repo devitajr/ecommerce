@@ -1,0 +1,27 @@
+{% extends 'products/baseProducts.html' %}
+{% load static %}
+{% block body %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Valor Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for product in cart %}
+            <tr>
+                <td>{{product.product}}</td>
+                <td>{{product.value}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.total_value}}</td>
+            </tr>
+            {% endfor %}
+          
+        </tbody>
+      </table>
+
+
+{% endblock %}
