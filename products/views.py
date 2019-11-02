@@ -12,86 +12,86 @@ def baseProducts(request):
     return render(request,"products/baseProducts.html")
 
 def listaProdutos(request):
-    
-    company = Company.objects.all()
+    if request.user.is_authenticated:
+        company = Company.objects.all()
 
-    categories = Category.objects.all()
+        categories = Category.objects.all()
 
-    item_pesquisado = ""
+        item_pesquisado = ""
 
-    products = Product.objects.all()
+        products = Product.objects.all()
 
-    productNotFound=False
+        productNotFound=False
 
-    pesquisou_algo = False
+        pesquisou_algo = False
 
-    if request.method == "POST":
+        if request.method == "POST":
 
-        item_pesquisado = request.POST.get('item_pesquisado')
+            item_pesquisado = request.POST.get('item_pesquisado')
 
-        category_name = request.POST.get('category_name')
+            category_name = request.POST.get('category_name')
 
-        if item_pesquisado != "":
-            products = Product.objects.filter(name=item_pesquisado)
-            pesquisou_algo = True
-            if products.exists()==False:
+            if item_pesquisado != "":
+                products = Product.objects.filter(name=item_pesquisado)
+                pesquisou_algo = True
+                if products.exists()==False:
+                    productNotFound = True
+
+            else:
                 productNotFound = True
-
-        else:
-            productNotFound = True
-        
-        if productNotFound and (category_name != ""):
-            searched_category = Category.objects.filter(name = category_name)
-            if searched_category.exists():
-                products = Product.objects.filter(category=searched_category[0])
-                productNotFound = False
-
-        if productNotFound:
-            products = Product.objects.all()
-
             
+            if productNotFound and (category_name != ""):
+                searched_category = Category.objects.filter(name = category_name)
+                if searched_category.exists():
+                    products = Product.objects.filter(category=searched_category[0])
+                    productNotFound = False
 
-    qntd_resultados_items = products.__len__
+            if productNotFound:
+                products = Product.objects.all()
 
-    return render(request,"products/productList.html",{
-        'products': products,
-        'company': company[0],
-        'qntd_resultados_items': qntd_resultados_items,
-        'item_pesquisado': item_pesquisado,
-        'categories': categories,
-        'pesquisou_algo':pesquisou_algo,
-    })
+                
+
+        qntd_resultados_items = products.__len__
+
+        return render(request,"products/productList.html",{
+            'products': products,
+            'company': company[0],
+            'qntd_resultados_items': qntd_resultados_items,
+            'item_pesquisado': item_pesquisado,
+            'categories': categories,
+            'pesquisou_algo':pesquisou_algo,
+        })
 
 def produto(request,main_product_id):
-    
-    if main_product_id != None:
+    if request.user.is_authenticated:
+        if main_product_id != None:
 
-        main_product = Product.objects.filter(id = main_product_id)
-        
-        if main_product.exists():        
-            main_product = main_product[0]
+            main_product = Product.objects.filter(id = main_product_id)
             
-            company = Company.objects.all()
+            if main_product.exists():        
+                main_product = main_product[0]
+                
+                company = Company.objects.all()
 
-            categories = Category.objects.all()
+                categories = Category.objects.all()
 
-            # number_of_stars=main_product.number_of_stars
-            number_of_stars = 3
-            # quantity_in_stock = main_product.quantity_in_stock
-            quantity_in_stock = 3
-            related_items = Product.objects.filter(category=main_product.category)
+                # number_of_stars=main_product.number_of_stars
+                number_of_stars = 3
+                # quantity_in_stock = main_product.quantity_in_stock
+                quantity_in_stock = 3
+                related_items = Product.objects.filter(category=main_product.category)
+                
+                return render(request,"products/product.html",{
+                    'number_of_stars': range(0,number_of_stars),
+                    'company': company[0],
+                    'categories': categories,
+                    'main_product':main_product,
+                    'related_items':related_items,
+                    'quantity_in_stock': range(1,quantity_in_stock)
+                })
             
-            return render(request,"products/product.html",{
-                'number_of_stars': range(0,number_of_stars),
-                'company': company[0],
-                'categories': categories,
-                'main_product':main_product,
-                'related_items':related_items,
-                'quantity_in_stock': range(1,quantity_in_stock)
-            })
-        
-        else:
-            return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Produto não encontrado</h3>')    
+            else:
+                return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Produto não encontrado</h3>')    
 
     else:
         return HttpResponseNotFound ('<h1>Erro 404</h1><h3>Página não encontrada</h3>')
@@ -127,11 +127,12 @@ def adicionarProdutoCarrinho(request, main_product_id):
     return redirect("listaDeProdutos")
 
 def payment(request):
-    if(request.method == 'POST'):
-        form = PayForm(request.POST)
-        if not form.is_valid():
-            return redirect(payCompleted)
-    else:
-        form = PayForm(initial={'key': 'value'})
+    if request.user.is_authenticated:
+        if(request.method == 'POST'):
+            form = PayForm(request.POST)
+            if not form.is_valid():
+                return redirect(payCompleted)
+        else:
+            form = PayForm(initial={'key': 'value'})
     
     return redirect('payProducts')

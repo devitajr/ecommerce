@@ -30,11 +30,7 @@ def paginaInicial(request):
 
     cart = Cart(request)
     num = cart.__len__()
-
-
-    print("---------------------")
-    print(num)
-    print("---------------------")
+    
     return render(request, 'startpage/EntrancePageText.html',{
         'company': company[0],
         'items': items,
